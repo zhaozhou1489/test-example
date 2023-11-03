@@ -28,32 +28,38 @@ public class UserController {
 
     @PostMapping("/selectOne")
     public Object selectOne(@RequestBody QueryParam param){
+        //解析及验证查询参数
         QueryCond cond = new QueryCond();
         String errMsg = QueryTransUtil.transQueryParam(param,cond,null,null);
         if (StringUtils.isNotBlank(errMsg)){
             return errMsg;
         }
+        //查询db
         return userService.selectOne(cond);
     }
 
 
     @PostMapping("/selectList")
     public Object selectList(@RequestBody QueryParam param){
+        //解析及验证查询参数
         QueryCond cond = new QueryCond();
         String errMsg = QueryTransUtil.transQueryParam(param,cond,null,null);
         if (StringUtils.isNotBlank(errMsg)){
             return errMsg;
         }
+        //查询db
         return userService.selectList(cond);
     }
 
     @PostMapping("/selectPage")
     public Object selectPage(@RequestBody QueryParam param){
+        //解析及验证查询参数
         QueryCond cond = new QueryCond();
         String errMsg = QueryTransUtil.transQueryParam(param,cond,null,null);
         if (StringUtils.isNotBlank(errMsg)){
             return errMsg;
         }
+        //查询db
         return userService.selectPage(cond, 1, 10);
     }
 }

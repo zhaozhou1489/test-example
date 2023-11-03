@@ -24,15 +24,14 @@ import java.util.Arrays;
 @RequestMapping(value = "/test")
 public class TestController {
 
-    @Autowired
-    private UserService userService;
-
     private static OkHttpClient okHttpClient = new OkHttpClient();
     @GetMapping("/selectOne")
     public Object selectOne(){
+        //通过QueryBuilder构造查询参数
         QueryBuilder builder = QueryBuilder.newBuilder();
         builder.addEqualQuery("code","111")
                 .addLikeQuery("name","tom");
+        //通过http请求调用对应接口
         Object obj=  this.postRequest("/user/selectOne", builder.getQueryParam());
         return obj;
     }
