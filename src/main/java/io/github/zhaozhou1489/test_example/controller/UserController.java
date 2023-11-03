@@ -26,13 +26,34 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/find")
-    public Object findUser(@RequestBody QueryParam param){
+    @PostMapping("/selectOne")
+    public Object selectOne(@RequestBody QueryParam param){
         QueryCond cond = new QueryCond();
         String errMsg = QueryTransUtil.transQueryParam(param,cond,null,null);
         if (StringUtils.isNotBlank(errMsg)){
             return errMsg;
         }
-        return userService.findList(cond);
+        return userService.selectOne(cond);
+    }
+
+
+    @PostMapping("/selectList")
+    public Object selectList(@RequestBody QueryParam param){
+        QueryCond cond = new QueryCond();
+        String errMsg = QueryTransUtil.transQueryParam(param,cond,null,null);
+        if (StringUtils.isNotBlank(errMsg)){
+            return errMsg;
+        }
+        return userService.selectList(cond);
+    }
+
+    @PostMapping("/selectPage")
+    public Object selectPage(@RequestBody QueryParam param){
+        QueryCond cond = new QueryCond();
+        String errMsg = QueryTransUtil.transQueryParam(param,cond,null,null);
+        if (StringUtils.isNotBlank(errMsg)){
+            return errMsg;
+        }
+        return userService.selectPage(cond, 1, 10);
     }
 }
